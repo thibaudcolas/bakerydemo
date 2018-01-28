@@ -109,7 +109,7 @@ class StandardPage(Page):
     introduction_demo = RichTextField(
         # We enable the "strikethrough" feature in this field.
         # If it has been registered as a feature by the editor widget, it will be available when editing the field.
-        features=['h2', 'h3', 'bold', 'strikethrough'],
+        features=['h2', 'h3', 'bold', 'strikethrough', 'blockquote'],
         blank=True)
     introduction = models.TextField(
         help_text='Text to describe the page',

@@ -1,5 +1,5 @@
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
-from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler
+from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler, BlockElementHandler
 from wagtail.core import hooks
 from wagtail.core.whitelist import allow_without_attributes
 
@@ -46,4 +46,39 @@ def whitelister_strikethrough_feature():
     return {
         # Finally, we also need to configure Wagtail so it keeps the `s` tag when storing HTML in the DB.
         's': allow_without_attributes,
+    }
+
+
+@hooks.register('register_rich_text_features')
+def register_blockquote_feature(features):
+    features.default_features.append('blockquote')
+
+    features.register_converter_rule(
+        'contentstate', 'blockquote', {
+            'from_database_format': {
+                'blockquote': BlockElementHandler('BLOCKQUOTE'),
+            },
+            'to_database_format': {
+                'block_map': {'BLOCKQUOTE': 'blockquote'}
+            }
+        })
+
+    # We define how the editor will implement the blockquote feature.
+    features.register_editor_plugin(
+        # The editor is `draftail`, and the feature is `blockquote`, and it's a Draftail "inline style" feature.
+        'draftail', 'blockquote', draftail_features.BlockFeature({
+            # This should be the same as the uppercase identifiers above.
+            'type': 'BLOCKQUOTE',
+            # This will be displayed in the toolbar.
+            'label': '❝',
+            'description': 'Blockquote',
+            'element': 'blockquote',
+        })
+    )
+
+
+@hooks.register('construct_whitelister_element_rules')
+def whitelister_blockquote_feature():
+    return {
+        'blockquote': allow_without_attributes,
     }

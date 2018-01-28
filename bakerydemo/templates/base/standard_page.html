@@ -1,8 +1,10 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags wagtailcore_tags %}
 
 {% block content %}
     {% include "base/include/header.html" %}
+
+    {{ page.introduction_demo | richtext }}
 
     <div class="container">
         <div class="row">

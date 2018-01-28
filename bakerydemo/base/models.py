@@ -106,6 +106,11 @@ class StandardPage(Page):
     image, introduction and body field
     """
 
+    introduction_demo = RichTextField(
+        # We enable the "strikethrough" feature in this field.
+        # If it has been registered as a feature by the editor widget, it will be available when editing the field.
+        features=['h2', 'h3', 'bold', 'strikethrough'],
+        blank=True)
     introduction = models.TextField(
         help_text='Text to describe the page',
         blank=True)
@@ -121,6 +126,7 @@ class StandardPage(Page):
         BaseStreamBlock(), verbose_name="Page body", blank=True
     )
     content_panels = Page.content_panels + [
+        FieldPanel('introduction_demo', classname="full"),
         FieldPanel('introduction', classname="full"),
         StreamFieldPanel('body'),
         ImageChooserPanel('image'),
@@ -150,12 +156,12 @@ class HomePage(Page):
     hero_text = models.CharField(
         max_length=255,
         help_text='Write an introduction for the bakery'
-        )
+    )
     hero_cta = models.CharField(
         verbose_name='Hero CTA',
         max_length=255,
         help_text='Text to display on Call to Action'
-        )
+    )
     hero_cta_link = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -255,8 +261,8 @@ class HomePage(Page):
             MultiFieldPanel([
                 FieldPanel('hero_cta'),
                 PageChooserPanel('hero_cta_link'),
-                ])
-            ], heading="Hero section"),
+            ])
+        ], heading="Hero section"),
         MultiFieldPanel([
             ImageChooserPanel('promo_image'),
             FieldPanel('promo_title'),
@@ -267,15 +273,15 @@ class HomePage(Page):
             MultiFieldPanel([
                 FieldPanel('featured_section_1_title'),
                 PageChooserPanel('featured_section_1'),
-                ]),
+            ]),
             MultiFieldPanel([
                 FieldPanel('featured_section_2_title'),
                 PageChooserPanel('featured_section_2'),
-                ]),
+            ]),
             MultiFieldPanel([
                 FieldPanel('featured_section_3_title'),
                 PageChooserPanel('featured_section_3'),
-                ])
+            ])
         ], heading="Featured homepage sections", classname="collapsible")
     ]
 
@@ -336,7 +342,8 @@ class FormField(AbstractFormField):
     can read more about Wagtail forms at:
     http://docs.wagtail.io/en/latest/reference/contrib/forms/index.html
     """
-    page = ParentalKey('FormPage', related_name='form_fields', on_delete=models.CASCADE)
+    page = ParentalKey('FormPage', related_name='form_fields',
+                       on_delete=models.CASCADE)
 
 
 class FormPage(AbstractEmailForm):

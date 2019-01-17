@@ -88,8 +88,8 @@ if ELASTICSEARCH_ENDPOINT:
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-# MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')

@@ -17,3 +17,6 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"}
 ]
+
+# The Wagtail styleguide is a valuable UI testing view.
+INSTALLED_APPS = INSTALLED_APPS + ["wagtail.contrib.styleguide"]

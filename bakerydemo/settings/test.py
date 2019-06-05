@@ -19,7 +19,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # The Wagtail styleguide is a valuable UI testing view.
-INSTALLED_APPS = INSTALLED_APPS + ["wagtail.contrib.styleguide"]
+INSTALLED_APPS = INSTALLED_APPS + ["wagtail.contrib.styleguide", "bakerydemo.auto_auth"]
 
 # We want browser automation to be able to read the session cookie’s value.
 SESSION_COOKIE_HTTPONLY = False

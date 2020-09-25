@@ -1,8 +1,9 @@
 version: ~> 1.0
 dist: bionic
 language: minimal
-# branches:
-#   only:
+branches:
+  only:
+    - bakerydemo-thibaudcolas-cron
 #   - bakerydemo-thibaudcolas
 #   - bakerydemo-thibaudcolas2
 #   - bakerydemo-thibaudcolas3
@@ -11,7 +12,15 @@ language: minimal
 install:
 - echo 'There is no install step'
 script:
-- echo 'Automated deployment to Heroku'
+- cat requirements/base.txt | grep -v 'wagtail>' | grep -v 'releases.wagtail.io' > base-filtered.txt && mv base-filtered.txt requirements/base.txt
+- curl --silent https://releases.wagtail.io/nightly/latest.json 2>&1 | cut -d '"' -f 4 | tee >> requirements/base.txt
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: "$PAGES_GITHUB_API_TOKEN"
+    target_branch: bakerydemo-thibaudcolas-nightly
+    on:
+      branch: bakerydemo-thibaudcolas-cron
 # deploy:
 #   provider: heroku
 #   api_key:
@@ -26,3 +35,8 @@ script:
 #     bakerydemo-thibaudcolas5: bakerydemo-thibaudcolas5
 notifications:
   email: false
+env:
+  global:
+    # Permissions: public_repo
+    # travis encrypt --pro PAGES_GITHUB_API_TOKEN=<value>
+    - secure: "tISNzXKmPSgmI7JEskTWcmH99Tp6DSQNwIP4EFMboX2Bx85NwuuhAoGESSwXYtjgPHoo7HjTthhUeB0c0ZEKgzBNcIH5wtzaB6JByjVKVE5Sy5W/v0K2lcmWYfkgR8SIIHhhIafuFZPy2NDdJGxIQxvvgmCnYWm7i0oTJ3p72mvUcGghURiKp4llJZ+zFLWlBEc5ShqfKZepMzZ4MW6KeC75q/uXmzPEE480+A6gf7iw2I4yKfTQy/aApjf6BuvIv0HOOUh+mMgD4569GDqcA8rTgjNynRztw/lth8Cd0935ih+w53BbBwSrlWtbDUQvLv4/O/gHFZusOX35NRGQ7bcsEdBJ0OidahNUFUiLDeTmBFlkemJqKPX88oHQTaon/jojDWt70g+jCsKX4K7v3/lmPH+2hwV+LCWLi+tKu+6pXGnGlMhiAJ5m6WQ2jryX3S9hzebPpOL9thLnNQLmy0g6xtyAt00TeNL2Guon84ceX27Uldpb0zJTr2HFAI4E1SzwNMO6orb58SOVDeTUChB8FHQhs2f2L8cxXJ0GJUiy0FWXKO78DUmH3sIM7iQeJvJvzLjT+oDi8qnFEG9qBkWxbxfVRYoZmknNHa7nKUgDCnWBzeOpOo4DzsYFA1P8RA/k/rxNKTvFCGxRgtGVgs3rxlhBWcyTaeALdsYwMd8="

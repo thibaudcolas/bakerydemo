@@ -1,0 +1,42 @@
+version: ~> 1.0
+dist: bionic
+language: minimal
+branches:
+  only:
+    - bakerydemo-thibaudcolas-cron
+#   - bakerydemo-thibaudcolas
+#   - bakerydemo-thibaudcolas2
+#   - bakerydemo-thibaudcolas3
+#   - bakerydemo-thibaudcolas4
+#   - bakerydemo-thibaudcolas5
+install:
+- echo 'There is no install step'
+script:
+- cat requirements/base.txt | grep -v 'wagtail>' | grep -v 'releases.wagtail.io' > base-filtered.txt && mv base-filtered.txt requirements/base.txt
+- curl --silent https://releases.wagtail.io/nightly/latest.json 2>&1 | cut -d '"' -f 4 | tee >> requirements/base.txt
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: "$PAGES_GITHUB_API_TOKEN"
+    target_branch: bakerydemo-thibaudcolas-nightly
+    on:
+      branch: bakerydemo-thibaudcolas-cron
+# deploy:
+#   provider: heroku
+#   api_key:
+#     # $ travis encrypt --pro $(heroku auth:token)
+#     # Warning: token will expire 09/25/2021
+#     secure: "CAwu8zSUpNdKEFvXWSYVK80V+0SVqGIiQJoKiJB/RbgBHBPNEInrmubtLi8OHu6hcwDuU3s8s8HekHrh6Wb5wZCZHWdRkx9rRwr5TxnEGb2CFCzeitkGHWkc08PELwLnbJ8FK6qK8D1ccv+TLZqcxzu++UzZ07n24OGU7zjasXKjF8TVYULSPUxW0llybX2zAzNPHSG+VpokSwpuPXTeYdmXVtg5+Cm90MwsByCnsQ04drLlzoKX6QUayxR3qGbgLRE37lKmRZW09ukVfC+f2ooP2yAsMTcpKKm1CZZ6N6Qu0lFE1218ZZjJ0+drusQP+h+eHgZxCxT1lY9uIa5wzGfljee5giuqAh/U8RISfUOktR+bNBFDASv788KsdQOztKNdzyKLWrE8LjR7INJcrv3j9go7DZ08UZmGEzw1gK1UDR2bG//QL34WWSkmZgvvxzj7xrvyO7VEU7rx19WZrv9T9Yp5Bn4uWMtjFevKGirZl4/+Uys6OyGcwIVohRk6lv9HW+DxQNP+81E4xz6IBka8gnkbRRdYxpjI+QwExz3B4KjwnzHPb6gSjGbDuz3BtFKsztY8k56LWj4nC897reyKRQLfwvFjKIajPDR/iFpjuzOAC8bAcIhf+f+553q8ZWxpNqJ2dQi8F0/ukyTWTFmg7W0ggpL0t7WsEDzk7m4="
+#   app:
+#     # bakerydemo-thibaudcolas: bakerydemo-thibaudcolas
+#     bakerydemo-thibaudcolas2: bakerydemo-thibaudcolas2
+#     bakerydemo-thibaudcolas3: bakerydemo-thibaudcolas3
+#     bakerydemo-thibaudcolas4: bakerydemo-thibaudcolas4
+#     bakerydemo-thibaudcolas5: bakerydemo-thibaudcolas5
+notifications:
+  email: false
+env:
+  global:
+    # Permissions: public_repo
+    # travis encrypt --pro PAGES_GITHUB_API_TOKEN=<value>
+    - secure: "tISNzXKmPSgmI7JEskTWcmH99Tp6DSQNwIP4EFMboX2Bx85NwuuhAoGESSwXYtjgPHoo7HjTthhUeB0c0ZEKgzBNcIH5wtzaB6JByjVKVE5Sy5W/v0K2lcmWYfkgR8SIIHhhIafuFZPy2NDdJGxIQxvvgmCnYWm7i0oTJ3p72mvUcGghURiKp4llJZ+zFLWlBEc5ShqfKZepMzZ4MW6KeC75q/uXmzPEE480+A6gf7iw2I4yKfTQy/aApjf6BuvIv0HOOUh+mMgD4569GDqcA8rTgjNynRztw/lth8Cd0935ih+w53BbBwSrlWtbDUQvLv4/O/gHFZusOX35NRGQ7bcsEdBJ0OidahNUFUiLDeTmBFlkemJqKPX88oHQTaon/jojDWt70g+jCsKX4K7v3/lmPH+2hwV+LCWLi+tKu+6pXGnGlMhiAJ5m6WQ2jryX3S9hzebPpOL9thLnNQLmy0g6xtyAt00TeNL2Guon84ceX27Uldpb0zJTr2HFAI4E1SzwNMO6orb58SOVDeTUChB8FHQhs2f2L8cxXJ0GJUiy0FWXKO78DUmH3sIM7iQeJvJvzLjT+oDi8qnFEG9qBkWxbxfVRYoZmknNHa7nKUgDCnWBzeOpOo4DzsYFA1P8RA/k/rxNKTvFCGxRgtGVgs3rxlhBWcyTaeALdsYwMd8="

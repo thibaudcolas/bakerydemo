@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'wagtail.contrib.routable_page',
     'wagtail.core',
 
+    'wagtail_picture_proposal',
+
     'rest_framework',
     'modelcluster',
     'taggit',

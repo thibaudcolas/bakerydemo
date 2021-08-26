@@ -1,11 +1,50 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags wagtailcore_tags %}
+{% load wagtailimages_tags wagtailcore_tags wagtailpictureproposal_tags %}
 
 {% block content %}
 <div class="homepage">
+<script>
+function support_format_webp()
+{
+ var elem = document.createElement('canvas');
 
-{% image page.image fill-1920x600 as image %}
-<div class="container-fluid hero" style="background-image:url('{{ image.url }}')">
+ if (!!(elem.getContext && elem.getContext('2d')))
+ {
+  // was able or not to get WebP representation
+  return elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
+ }
+ else
+ {
+  // very old browser like IE 8, canvas not supported
+  return false;
+ }
+}
+
+document.body.classList.toggle('webp', support_format_webp())
+document.body.classList.toggle('no-webp', !support_format_webp())
+</script>
+
+{% webp_picture_wip page.image fill-{188x360-c100,1920x600} q-60 as srcset %}
+{# {% image page.image fill-1920x600 as image %} #}
+<style>
+  .no-webp #hero-bg {
+    background-image: url('{{ srcset.fallback_source.0.url }}');
+  }
+  @media screen and (min-width: 801px) {
+    .no-webp #hero-bg {
+      background-image: url('{{ srcset.fallback_source.1.url }}');
+    }
+  }
+  .webp #hero-bg {
+    background-image: url('{{ srcset.webp_source.0.url }}');
+  }
+  @media screen and (min-width: 801px) {
+    .webp #hero-bg {
+      background-image: url('{{ srcset.webp_source.1.url }}');
+    }
+  }
+</style>
+<div id="hero-bg" class="container-fluid hero">
     <div class="hero-gradient-mask"></div>
     <div class="container">
         <div class="row">
@@ -28,7 +67,8 @@
     <div class="row promo-row">
         <div class="col-sm-5 promo">
             {% if page.promo_image or page.promo_title or page.promo_text %}
-                <figure>{% image page.promo_image fill-200x200-c100 %}</figure>
+                {# <figure>{% image page.promo_image fill-200x200-c100 %}</figure> #}
+                <figure>{% webp_picture_wip page.promo_image fill-{200x200,120x120}-c100 q-60 sizes="200px, (max-width: 970px) 120px" loading="lazy" %}</figure>
                 <div class="promo-text">
                     <h3>{{ page.promo_title }}</h3>
                     {{ page.promo_text|safe }}
@@ -46,7 +86,7 @@
                                 <div class="col-xs-4">
                                     <a href="{{childpage.url}}">
                                         <figure>
-                                            {% image childpage.image fill-180x140-c100 %}
+                                            {% image childpage.image fill-180x140-c100 loading="lazy" %}
                                         </figure>
                                     </a>
                                 </div>
@@ -84,7 +124,7 @@
                         <li class="col-sm-4 feature-2-item">
                             <a href="{{childpage.url}}">
                                 <figure>
-                                    {% image childpage.image fill-430x210-c100 %}
+                                    {% webp_picture_wip childpage.image fill-{430x210,365x210}-c100 q-60 sizes="30vw, (max-width: 375px) 365px" loading="lazy" %}
                                 </figure>
                             </a>
                             <div class="feature-2-text">
@@ -109,7 +149,7 @@
                         <li class="col-md-4">
                             <a href="{{childpage.url}}">
                                 <figure>
-                                    {% image childpage.image fill-430x254-c100 %}
+                                    {% webp_picture_wip childpage.image fill-{430x254,335x198}-c100 q-60 sizes="30vw, (max-width: 375px) 335px" loading="lazy" %}
                                 </figure>
                                 <h3>{{childpage.title}}</h3>
                             </a>

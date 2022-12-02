@@ -42,7 +42,7 @@ ADD . /code/
 EXPOSE 8000
 
 # Add custom environment variables needed by Django or your settings file here:
-ENV DJANGO_SETTINGS_MODULE=bakerydemo.settings.production DJANGO_DEBUG=off
+ENV DJANGO_SETTINGS_MODULE=bakerydemo.settings.dev DJANGO_DEBUG=off
 
 # Tell uWSGI where to find your wsgi file:
 ENV UWSGI_WSGI_FILE=bakerydemo/wsgi.py

@@ -17,3 +17,5 @@ dotenv.read_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".en
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bakerydemo.settings.dev")
 
 application = get_wsgi_application()
+
+app = application

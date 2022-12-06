@@ -2,7 +2,8 @@
   "builds": [
     {
       "src": "bakerydemo/wsgi.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "excludeFiles": "bakerydemo/base/fixtures/**"
     }
   ],
   "routes": [

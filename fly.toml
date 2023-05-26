@@ -9,6 +9,8 @@ processes = []
   dockerfile = "Dockerfile"
 
 [env]
+  DJANGO_SETTINGS_MODULE = "bakerydemo.settings.production"
+  DJANGO_SECRET_KEY = "potato"
 
 [experimental]
   allowed_public_ports = []

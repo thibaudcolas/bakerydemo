@@ -5,7 +5,7 @@
     <div class="homepage">
 
         <div class="container-fluid hero">
-            {% image page.image fill-1920x600 class="hero-image" alt="" %}
+            {% image_srcset page.image fill-{1920x600,960x300} sizes="100vw" class="hero-image" alt="" %}
             <div class="hero-gradient-mask"></div>
             <div class="container">
                 <div class="row">

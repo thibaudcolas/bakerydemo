@@ -1246,54 +1246,6 @@
     }
   },
   {
-    "model": "wagtailsearchpromotions.query",
-    "pk": 1,
-    "fields": {
-      "query_string": "chocolate"
-    }
-  },
-  {
-    "model": "wagtailsearchpromotions.query",
-    "pk": 2,
-    "fields": {
-      "query_string": "london"
-    }
-  },
-  {
-    "model": "wagtailsearchpromotions.query",
-    "pk": 3,
-    "fields": {
-      "query_string": "circus"
-    }
-  },
-  {
-    "model": "wagtailsearchpromotions.querydailyhits",
-    "pk": 1,
-    "fields": {
-      "query": 1,
-      "date": "2019-02-11",
-      "hits": 2
-    }
-  },
-  {
-    "model": "wagtailsearchpromotions.querydailyhits",
-    "pk": 2,
-    "fields": {
-      "query": 2,
-      "date": "2019-02-15",
-      "hits": 1
-    }
-  },
-  {
-    "model": "wagtailsearchpromotions.querydailyhits",
-    "pk": 3,
-    "fields": {
-      "query": 3,
-      "date": "2019-02-24",
-      "hits": 1
-    }
-  },
-  {
     "model": "wagtailforms.formsubmission",
     "pk": 1,
     "fields": {
@@ -1403,8 +1355,10 @@
     "fields": {
       "query": 1,
       "page": 63,
-      "sort_order": 0,
-      "description": ""
+      "external_link_url": "",
+      "external_link_text": null,
+      "description": "",
+      "sort_order": 0
     }
   },
   {
@@ -1413,8 +1367,10 @@
     "fields": {
       "query": 4,
       "page": 40,
-      "sort_order": 0,
-      "description": ""
+      "external_link_url": "",
+      "external_link_text": null,
+      "description": "",
+      "sort_order": 0
     }
   },
   {
@@ -1423,8 +1379,10 @@
     "fields": {
       "query": 5,
       "page": 36,
-      "sort_order": 0,
-      "description": ""
+      "external_link_url": "",
+      "external_link_text": null,
+      "description": "",
+      "sort_order": 0
     }
   },
   {
@@ -1697,7 +1655,7 @@
     "pk": 3,
     "fields": {
       "password": "pbkdf2_sha256$600000$yzcRrbI8n9Yfwg8S9T0nZt$4bZz0FcUIq/zFOU6XDrb31HxAFnsHqoqyR/CCSevqmE=",
-      "last_login": "2023-09-01T17:55:27.917Z",
+      "last_login": "2024-07-24T06:30:04.739Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "Admin",
@@ -1715,7 +1673,7 @@
     "pk": 4,
     "fields": {
       "password": "pbkdf2_sha256$600000$vDpqnaE6Nb6yc4r0v9Z6MK$xHyp2mJ1UZOhNnmjgOF8Id8W8gIbif8xyCS8Vj0NICU=",
-      "last_login": "2023-09-01T16:57:17.041Z",
+      "last_login": "2024-07-19T13:15:59.050Z",
       "is_superuser": false,
       "username": "editor",
       "first_name": "Eddy",
@@ -1769,7 +1727,7 @@
     "pk": 7,
     "fields": {
       "password": "pbkdf2_sha256$600000$HfWLDvRsEWtiAVtHTIex9v$FZJZ5U5KpkMcXFHRXh+y3PThUVgJx7pVqT/hePR/oDo=",
-      "last_login": "2019-04-23T19:58:19.460Z",
+      "last_login": "2024-07-19T13:18:13.119Z",
       "is_superuser": true,
       "username": "german",
       "first_name": "Friedrich Wilhelm",
@@ -1796,6 +1754,78 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2019-02-17T08:05:33.700Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$WAosjtfeEO7oJe61oAQo2o$B8+23s0IvLU567S69DxD7RdhkoDzTglrkcc1HWyQzdc=",
+      "last_login": "2024-07-19T13:12:53.199Z",
+      "is_superuser": true,
+      "username": "muddy",
+      "first_name": "Muddy",
+      "last_name": "Waters",
+      "email": "muddy@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-07-19T13:05:39.925Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$KepH5n7dxgQs8H55I22afZ$EK5KxpLBDV3+7Qlnpxzp8g+pIhBx0bRnRII7Q4f0KhY=",
+      "last_login": "2024-07-19T13:12:02.442Z",
+      "is_superuser": true,
+      "username": "lightnin",
+      "first_name": "Lightnin'",
+      "last_name": "Hopkins",
+      "email": "lightnin@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-07-19T13:06:06.239Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$mEpOwghi9qhNbbConcuJSL$qkl26yEbpyOpZKuVKKK7x1gN2Meo14+yFIhSulhXBx4=",
+      "last_login": "2024-07-19T13:11:30.356Z",
+      "is_superuser": true,
+      "username": "olivia",
+      "first_name": "Olivia",
+      "last_name": "Ava",
+      "email": "olivia@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-07-19T13:06:24.582Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$TqozdxjucajtfIYDyDWmhL$RqxUhyu7G1sbwRmYP5/UIDzoxTvhcnI3DBnw2brCoG4=",
+      "last_login": "2024-07-19T13:07:48.203Z",
+      "is_superuser": true,
+      "username": "roberta",
+      "first_name": "Roberta",
+      "last_name": "Johnson",
+      "email": "roberta@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-07-19T13:06:45.751Z",
       "groups": [],
       "user_permissions": []
     }
@@ -3843,6 +3873,40 @@
       "content_changed": true,
       "deleted": false,
       "page": 68
+    }
+  },
+  {
+    "model": "wagtailcore.pagelogentry",
+    "pk": 116,
+    "fields": {
+      "content_type": ["blog", "blogpage"],
+      "label": "The Great Icelandic Baking Show",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:19:05.791Z",
+      "uuid": "dfe31763-98c5-46c6-ae1a-777c5b09107b",
+      "user": ["roberta"],
+      "revision": 112,
+      "content_changed": true,
+      "deleted": false,
+      "page": 72
+    }
+  },
+  {
+    "model": "wagtailcore.pagelogentry",
+    "pk": 117,
+    "fields": {
+      "content_type": ["blog", "blogpage"],
+      "label": "The Great Icelandic Baking Show",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:33:15.819Z",
+      "uuid": "f2a95375-0e24-401c-ad85-47db3e488987",
+      "user": ["roberta"],
+      "revision": 113,
+      "content_changed": true,
+      "deleted": false,
+      "page": 72
     }
   },
   {
@@ -9889,6 +9953,146 @@
     }
   },
   {
+    "model": "wagtailcore.revision",
+    "pk": 112,
+    "fields": {
+      "content_type": ["blog", "blogpage"],
+      "base_content_type": ["wagtailcore", "page"],
+      "object_id": "72",
+      "created_at": "2024-07-19T13:19:05.731Z",
+      "user": ["roberta"],
+      "object_str": "The Great Icelandic Baking Show",
+      "content": {
+        "pk": 72,
+        "path": "0001000200040003",
+        "depth": 4,
+        "numchild": 0,
+        "translation_key": "c1324591-fed6-47b3-95f3-e880fae219c2",
+        "locale": 1,
+        "latest_revision": 48,
+        "live": true,
+        "has_unpublished_changes": false,
+        "first_published_at": "2019-02-21T08:07:11.832Z",
+        "last_published_at": "2023-09-01T16:55:14.091Z",
+        "live_revision": 48,
+        "go_live_at": null,
+        "expire_at": null,
+        "expired": false,
+        "locked": false,
+        "locked_at": null,
+        "locked_by": null,
+        "title": "The Great Icelandic Baking Show",
+        "draft_title": "The Great Icelandic Baking Show",
+        "slug": "icelandic-baking",
+        "content_type": 40,
+        "url_path": "/home/blog/icelandic-baking/",
+        "owner": 3,
+        "seo_title": "",
+        "show_in_menus": false,
+        "search_description": "",
+        "latest_revision_created_at": "2023-09-01T16:55:14.052Z",
+        "alias_of": null,
+        "introduction": "Nordic bread culture has existed in Denmark, Finland, Norway, and Sweden from prehistoric time through to the present.",
+        "image": 23,
+        "body": "[{\"type\": \"paragraph_block\", \"value\": \"<p data-block-key=\\\"ddwx7\\\">Four grain types dominated in the Nordic countries: barley and rye are the oldest; wheat and oats are more recent. During the Iron Age (500 AD \\u2013 1050 AD), rye became the most commonly used grain, followed by barley and oats. Rye was also the most commonly used grain for bread up until the beginning of the 20th century. Today, older grain types such as emmer and spelt are once again being cultivated and new bread types are being developed from these grains.</p><p data-block-key=\\\"6k1tf\\\">Archaeological finds in Denmark indicate use of the two triticum (wheat) species, emmer and einkorn, during the Mesolithic Period (8900 BC \\u2013 3900 BC). There is no direct evidence of bread-making, but cereals have been crushed, cooked and served as porridge since at least 4,200 BC. During the Neolithic Period (3900 BC \\u2013 1800 BC), when agriculture was introduced, barley seems to have taken over to some extent, and ceramic plates apparently used for baking are found. Moulded cereals, with water added to make a dough and baked or fried in the shape of bread, are known as burial gifts in Iron Age graves (200 AD onwards) in the M\\u00e4lardalen area of central Sweden. However, it is not certain that this bread was eaten; it could just have been a burial gift. During the Bronze Age (1800 BC \\u2013 500 AD), oats and the triticum species spelt seem to have been the most commonly used grains, and we see the first real ovens, probably used for baking small loaves and perhaps the first bread (probably around 400 AD).</p><p data-block-key=\\\"x1hdg\\\"><br/></p>\", \"id\": \"5a0af64d-01b0-4a7a-abc2-6ca6a7faab23\"}, {\"type\": \"image_block\", \"value\": {\"image\": 42, \"caption\": \"Baking Soda\", \"attribution\": \"Creative Commons\"}, \"id\": \"103a747f-057a-4c95-9cbe-dfc57cf5107b\"}, {\"type\": \"paragraph_block\", \"value\": \"<p data-block-key=\\\"eeawu\\\">Scandinavian soldiers in Roman times apparently learned baking techniques when working as mercenaries in the Roman army (200\\u2013400 AD). They subsequently took the technique home with them to show that they had been employed in high status work on the continent[citation needed]. Early Christian traditions promoted an interest in bread. Culturally, German traditions have influenced most of the bread types in the Nordic countries. In the eastern part of Finland, there is a cultural link to Russia and Slavic bread traditions.</p><p data-block-key=\\\"du2aa\\\">In the Nordic countries, bread was the main part of a meal until the late 18th century. Four different bread regions can be found in the Nordic area in the late 19th century. In the south, soft rye bread dominated. Further north came crisp bread, usually baked with rye, then thin and crispy barley bread. In the far north, soft barley loaves dominated. During the 19th century, potatoes began to become the centrepiece of meals and bread was put aside as an extra source of carbohydrates in a meal. Bread still retained its key function for breakfast, as the open sandwich is a starter for most Nordic people today and potatoes are used as a centrepiece in lunches and dinners.</p>\", \"id\": \"d327ccf8-308d-4145-9f1f-0bac66a36276\"}, {\"type\": \"image_block\", \"value\": {\"image\": 14, \"caption\": \"Fresh baked\", \"attribution\": \"Creative Commons\"}, \"id\": \"244a26d0-eae0-4799-8fad-ef0501bdfcff\"}, {\"type\": \"paragraph_block\", \"value\": \"<p data-block-key=\\\"r1fvt\\\">A history of Nordic bread from around 1000 AD and some contemporary types and bread innovations is presented below. Countries are presented in alphabetic order (Denmark, Finland, Iceland, Norway and Sweden). The names of the bread types are mostly given in both the contemporary national language and in English.</p>\", \"id\": \"e0755385-6cf2-4b57-8612-17d5d29fadb6\"}]",
+        "subtitle": "Viking bakeries and Norse donuts!",
+        "date_published": "2019-03-21",
+        "wagtail_admin_comments": [],
+        "blog_person_relationship": [
+          {
+            "pk": 4,
+            "sort_order": 0,
+            "page": 72,
+            "person": 3
+          }
+        ],
+        "tagged_items": [
+          {
+            "pk": null,
+            "tag": 8,
+            "content_object": 72
+          },
+          {
+            "pk": null,
+            "tag": 4,
+            "content_object": 72
+          }
+        ]
+      },
+      "approved_go_live_at": null
+    }
+  },
+  {
+    "model": "wagtailcore.revision",
+    "pk": 113,
+    "fields": {
+      "content_type": ["blog", "blogpage"],
+      "base_content_type": ["wagtailcore", "page"],
+      "object_id": "72",
+      "created_at": "2024-07-19T13:33:15.784Z",
+      "user": ["roberta"],
+      "object_str": "The Great Icelandic Baking Show",
+      "content": {
+        "pk": 72,
+        "path": "0001000200040003",
+        "depth": 4,
+        "numchild": 0,
+        "translation_key": "c1324591-fed6-47b3-95f3-e880fae219c2",
+        "locale": 1,
+        "latest_revision": 112,
+        "live": true,
+        "has_unpublished_changes": true,
+        "first_published_at": "2019-02-21T08:07:11.832Z",
+        "last_published_at": "2023-09-01T16:55:14.091Z",
+        "live_revision": 48,
+        "go_live_at": null,
+        "expire_at": null,
+        "expired": false,
+        "locked": false,
+        "locked_at": null,
+        "locked_by": null,
+        "title": "The Great Icelandic Baking Show",
+        "draft_title": "The Great Icelandic Baking Show",
+        "slug": "icelandic-baking",
+        "content_type": 40,
+        "url_path": "/home/blog/icelandic-baking/",
+        "owner": 3,
+        "seo_title": "",
+        "show_in_menus": false,
+        "search_description": "",
+        "latest_revision_created_at": "2024-07-19T13:19:05.731Z",
+        "alias_of": null,
+        "introduction": "Nordic bread culture has existed in Denmark, Finland, Norway, and Sweden from prehistoric time through to the present.",
+        "image": 23,
+        "body": "[{\"type\": \"paragraph_block\", \"value\": \"<p data-block-key=\\\"ddwx7\\\">Four grain types dominated in the Nordic countries: barley and rye are the oldest; wheat and oats are more recent. During the Iron Age (500 AD \\u2013 1050 AD), rye became the most commonly used grain, followed by barley and oats. Rye was also the most commonly used grain for bread up until the beginning of the 20th century. Today, older grain types such as emmer and spelt are once again being cultivated and new bread types are being developed from these grains.</p><p data-block-key=\\\"6k1tf\\\">Archaeological finds in Denmark indicate use of the two triticum (wheat) species, emmer and einkorn, during the Mesolithic Period (8900 BC \\u2013 3900 BC). There is no direct evidence of bread-making, but cereals have been crushed, cooked and served as porridge since at least 4,200 BC. During the Neolithic Period (3900 BC \\u2013 1800 BC), when agriculture was introduced, barley seems to have taken over to some extent, and ceramic plates apparently used for baking are found. Moulded cereals, with water added to make a dough and baked or fried in the shape of bread, are known as burial gifts in Iron Age graves (200 AD onwards) in the M\\u00e4lardalen area of central Sweden. However, it is not certain that this bread was eaten; it could just have been a burial gift. During the Bronze Age (1800 BC \\u2013 500 AD), oats and the triticum species spelt seem to have been the most commonly used grains, and we see the first real ovens, probably used for baking small loaves and perhaps the first bread (probably around 400 AD).</p><p data-block-key=\\\"x1hdg\\\"><br/></p>\", \"id\": \"5a0af64d-01b0-4a7a-abc2-6ca6a7faab23\"}, {\"type\": \"image_block\", \"value\": {\"image\": 42, \"caption\": \"Baking Soda\", \"attribution\": \"Creative Commons\"}, \"id\": \"103a747f-057a-4c95-9cbe-dfc57cf5107b\"}, {\"type\": \"paragraph_block\", \"value\": \"<p data-block-key=\\\"eeawu\\\">Scandinavian soldiers in Roman times apparently learned baking techniques when working as mercenaries in the Roman army (200\\u2013400 AD). They subsequently took the technique home with them to show that they had been employed in high status work on the continent[citation needed]. Early Christian traditions promoted an interest in bread. Culturally, German traditions have influenced most of the bread types in the Nordic countries. In the eastern part of Finland, there is a cultural link to Russia and Slavic bread traditions.</p><p data-block-key=\\\"du2aa\\\">In the Nordic countries, bread was the main part of a meal until the late 18th century. Four different bread regions can be found in the Nordic area in the late 19th century. In the south, soft rye bread dominated. Further north came crisp bread, usually baked with rye, then thin and crispy barley bread. In the far north, soft barley loaves dominated. During the 19th century, potatoes began to become the centrepiece of meals and bread was put aside as an extra source of carbohydrates in a meal. Bread still retained its key function for breakfast, as the open sandwich is a starter for most Nordic people today and potatoes are used as a centrepiece in lunches and dinners.</p>\", \"id\": \"d327ccf8-308d-4145-9f1f-0bac66a36276\"}, {\"type\": \"image_block\", \"value\": {\"image\": 14, \"caption\": \"Fresh baked\", \"attribution\": \"Creative Commons\"}, \"id\": \"244a26d0-eae0-4799-8fad-ef0501bdfcff\"}, {\"type\": \"paragraph_block\", \"value\": \"<p data-block-key=\\\"r1fvt\\\">A history of Nordic bread from around 1000 AD and some contemporary types and bread innovations is presented below. Countries are presented in alphabetic order (Denmark, Finland, Iceland, Norway and Sweden). The names of the bread types are mostly given in both the contemporary national language and in English.</p>\", \"id\": \"e0755385-6cf2-4b57-8612-17d5d29fadb6\"}]",
+        "subtitle": "Viking bakeries and Norse donuts!",
+        "date_published": "2019-03-21",
+        "wagtail_admin_comments": [],
+        "blog_person_relationship": [
+          {
+            "pk": 4,
+            "sort_order": 0,
+            "page": 72,
+            "person": 3
+          }
+        ],
+        "tagged_items": [
+          {
+            "pk": null,
+            "tag": 8,
+            "content_object": 72
+          },
+          {
+            "pk": null,
+            "tag": 4,
+            "content_object": 72
+          }
+        ]
+      },
+      "approved_go_live_at": null
+    }
+  },
+  {
     "model": "wagtailcore.page",
     "pk": 1,
     "fields": {
@@ -10713,9 +10917,9 @@
       "numchild": 0,
       "translation_key": "c1324591-fed6-47b3-95f3-e880fae219c2",
       "locale": 1,
-      "latest_revision": 48,
+      "latest_revision": 113,
       "live": true,
-      "has_unpublished_changes": false,
+      "has_unpublished_changes": true,
       "first_published_at": "2019-02-21T08:07:11.832Z",
       "last_published_at": "2023-09-01T16:55:14.091Z",
       "live_revision": 48,
@@ -10734,7 +10938,7 @@
       "seo_title": "",
       "show_in_menus": false,
       "search_description": "",
-      "latest_revision_created_at": "2023-09-01T16:55:14.052Z",
+      "latest_revision_created_at": "2024-07-19T13:33:15.784Z",
       "alias_of": null
     }
   },
@@ -11974,6 +12178,108 @@
     }
   },
   {
+    "model": "wagtailcore.modellogentry",
+    "pk": 53,
+    "fields": {
+      "content_type": ["auth", "user"],
+      "label": "admin",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:07:38.237Z",
+      "uuid": "d67847a2-28a2-4cdd-804f-575fb9738c38",
+      "user": ["admin"],
+      "revision": null,
+      "content_changed": false,
+      "deleted": false,
+      "object_id": "3"
+    }
+  },
+  {
+    "model": "wagtailcore.modellogentry",
+    "pk": 54,
+    "fields": {
+      "content_type": ["auth", "user"],
+      "label": "roberta",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:11:05.981Z",
+      "uuid": "a20a5eb4-cd0f-4732-afbd-f2256cc8f3f7",
+      "user": ["roberta"],
+      "revision": null,
+      "content_changed": false,
+      "deleted": false,
+      "object_id": "12"
+    }
+  },
+  {
+    "model": "wagtailcore.modellogentry",
+    "pk": 55,
+    "fields": {
+      "content_type": ["auth", "user"],
+      "label": "olivia",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:11:46.107Z",
+      "uuid": "fd0bc19a-2de2-4e1d-814f-413e15567c24",
+      "user": ["olivia"],
+      "revision": null,
+      "content_changed": false,
+      "deleted": false,
+      "object_id": "11"
+    }
+  },
+  {
+    "model": "wagtailcore.modellogentry",
+    "pk": 56,
+    "fields": {
+      "content_type": ["auth", "user"],
+      "label": "lightnin",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:12:30.952Z",
+      "uuid": "03668100-4e54-475b-865e-839adc988cfc",
+      "user": ["lightnin"],
+      "revision": null,
+      "content_changed": false,
+      "deleted": false,
+      "object_id": "10"
+    }
+  },
+  {
+    "model": "wagtailcore.modellogentry",
+    "pk": 57,
+    "fields": {
+      "content_type": ["auth", "user"],
+      "label": "muddy",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:13:08.077Z",
+      "uuid": "5dd83994-1f84-48d3-9e51-9b8d3692ab59",
+      "user": ["muddy"],
+      "revision": null,
+      "content_changed": false,
+      "deleted": false,
+      "object_id": "9"
+    }
+  },
+  {
+    "model": "wagtailcore.modellogentry",
+    "pk": 58,
+    "fields": {
+      "content_type": ["auth", "user"],
+      "label": "lightnin",
+      "action": "wagtail.edit",
+      "data": {},
+      "timestamp": "2024-07-19T13:14:34.950Z",
+      "uuid": "207a5e0c-d39d-4764-8b7b-9bec869a20bf",
+      "user": ["lightnin"],
+      "revision": null,
+      "content_changed": false,
+      "deleted": false,
+      "object_id": "10"
+    }
+  },
+  {
     "model": "wagtailredirects.redirect",
     "pk": 1,
     "fields": {
@@ -12083,6 +12389,28 @@
       "redirect_link": "",
       "automatically_created": false,
       "created_at": "2019-06-23T09:08:36.064Z"
+    }
+  },
+  {
+    "model": "wagtailadmin.editingsession",
+    "pk": 32,
+    "fields": {
+      "user": ["muddy"],
+      "content_type": ["wagtailcore", "page"],
+      "object_id": "83",
+      "last_seen_at": "2024-07-24T06:44:11.634Z",
+      "is_editing": false
+    }
+  },
+  {
+    "model": "wagtailadmin.editingsession",
+    "pk": 43,
+    "fields": {
+      "user": ["admin"],
+      "content_type": ["wagtailcore", "page"],
+      "object_id": "62",
+      "last_seen_at": "2024-07-24T09:19:46.453Z",
+      "is_editing": true
     }
   },
   {
@@ -12789,6 +13117,25 @@
     }
   },
   {
+    "model": "wagtailimages.image",
+    "pk": 54,
+    "fields": {
+      "collection": 1,
+      "title": "yeast.jpg",
+      "file": "original_images/yeast_FdqcSRV.jpg",
+      "width": 1024,
+      "height": 682,
+      "created_at": "2024-07-24T06:52:42.118Z",
+      "uploaded_by_user": ["admin"],
+      "focal_point_x": null,
+      "focal_point_y": null,
+      "focal_point_width": null,
+      "focal_point_height": null,
+      "file_size": 122348,
+      "file_hash": "72312f230c71a07665b8f678c551267608c6ed24"
+    }
+  },
+  {
     "model": "wagtaildocs.document",
     "pk": 1,
     "fields": {
@@ -12826,8 +13173,15 @@
       "preferred_language": "",
       "current_time_zone": "",
       "avatar": "",
-      "dismissibles": {},
-      "theme": "system"
+      "dismissibles": {
+        "help": true,
+        "whats-new-in-wagtail-6.2": true,
+        "editor-guide": true,
+        "whats-new-in-wagtail-6.1": true,
+        "whats-new-in-wagtail-6.3": true
+      },
+      "theme": "light",
+      "density": "default"
     }
   },
   {
@@ -12842,8 +13196,13 @@
       "preferred_language": "",
       "current_time_zone": "",
       "avatar": "",
-      "dismissibles": {},
-      "theme": "system"
+      "dismissibles": {
+        "help": true,
+        "whats-new-in-wagtail-6.2": true,
+        "editor-guide": true
+      },
+      "theme": "system",
+      "density": "default"
     }
   },
   {
@@ -12859,7 +13218,8 @@
       "current_time_zone": "Europe/Berlin",
       "avatar": "",
       "dismissibles": {},
-      "theme": "system"
+      "theme": "system",
+      "density": "default"
     }
   },
   {
@@ -12875,7 +13235,8 @@
       "current_time_zone": "Asia/Beirut",
       "avatar": "",
       "dismissibles": {},
-      "theme": "system"
+      "theme": "system",
+      "density": "default"
     }
   },
   {
@@ -12891,7 +13252,84 @@
       "current_time_zone": "",
       "avatar": "",
       "dismissibles": {},
-      "theme": "system"
+      "theme": "system",
+      "density": "default"
+    }
+  },
+  {
+    "model": "wagtailusers.userprofile",
+    "pk": 6,
+    "fields": {
+      "user": ["roberta"],
+      "submitted_notifications": true,
+      "approved_notifications": true,
+      "rejected_notifications": true,
+      "updated_comments_notifications": true,
+      "preferred_language": "",
+      "current_time_zone": "",
+      "avatar": "avatar_images/avatar_ee356458-89cf-43cf-9a93-8105b7e4f5f1_roberta_johnson.jpeg",
+      "dismissibles": {
+        "help": true,
+        "whats-new-in-wagtail-6.2": true,
+        "editor-guide": true
+      },
+      "theme": "system",
+      "density": "default"
+    }
+  },
+  {
+    "model": "wagtailusers.userprofile",
+    "pk": 7,
+    "fields": {
+      "user": ["olivia"],
+      "submitted_notifications": true,
+      "approved_notifications": true,
+      "rejected_notifications": true,
+      "updated_comments_notifications": true,
+      "preferred_language": "",
+      "current_time_zone": "",
+      "avatar": "avatar_images/avatar_b9057470-ea36-4c11-8e77-0e7b69f03c51_olivia_ava.jpeg",
+      "dismissibles": {
+        "help": true,
+        "whats-new-in-wagtail-6.3": true,
+        "editor-guide": true
+      },
+      "theme": "system",
+      "density": "default"
+    }
+  },
+  {
+    "model": "wagtailusers.userprofile",
+    "pk": 8,
+    "fields": {
+      "user": ["lightnin"],
+      "submitted_notifications": true,
+      "approved_notifications": true,
+      "rejected_notifications": true,
+      "updated_comments_notifications": true,
+      "preferred_language": "",
+      "current_time_zone": "",
+      "avatar": "avatar_images/avatar_7bf95f10-961e-423a-8975-4bafa8493952_lightnin_hopkins.jpg",
+      "dismissibles": {},
+      "theme": "system",
+      "density": "default"
+    }
+  },
+  {
+    "model": "wagtailusers.userprofile",
+    "pk": 9,
+    "fields": {
+      "user": ["muddy"],
+      "submitted_notifications": true,
+      "approved_notifications": true,
+      "rejected_notifications": true,
+      "updated_comments_notifications": true,
+      "preferred_language": "",
+      "current_time_zone": "",
+      "avatar": "avatar_images/avatar_4f184870-edbe-407d-b87b-4e94e833268c_muddy_waters.jpg",
+      "dismissibles": {},
+      "theme": "system",
+      "density": "default"
     }
   },
   {

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "bakerydemo.locations",
     "bakerydemo.recipes",
     "bakerydemo.search",
+    "bakerydemo.rich_text_demos",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",

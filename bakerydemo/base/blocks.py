@@ -7,7 +7,7 @@ from wagtail.blocks import (
     TextBlock,
 )
 from wagtail.embeds.blocks import EmbedBlock
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.blocks import ImageChooserBlock, ImageBlock
 
 
 class ImageBlock(StructBlock):
@@ -16,7 +16,7 @@ class ImageBlock(StructBlock):
     attribution data
     """
 
-    image = ImageChooserBlock(required=True)
+    image = ImageBlock(required=False)
     caption = CharBlock(required=False)
     attribution = CharBlock(required=False)
 

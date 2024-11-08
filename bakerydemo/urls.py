@@ -7,6 +7,8 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.images.views.serve import ServeView
+from wagtail_footnotes import urls as footnotes_urls
+
 
 from bakerydemo.search import views as search_views
 
@@ -15,6 +17,7 @@ from .api import api_router
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
+    path("footnotes/", include(footnotes_urls)),
     path("documents/", include(wagtaildocs_urls)),
     re_path(
         r"^images/([^/]*)/(\d*)/([^/]*)/[^/]*$",

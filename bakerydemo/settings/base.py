@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "modelcluster",
     "taggit",
+    "wagtail_footnotes",
     "wagtailfontawesomesvg",
     # Uncomment to enable django-debug-toolbar
     # "debug_toolbar",
@@ -78,6 +79,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
 ]
+
+# Set rich text features
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': ['h2', 'bold', 'italic', 'link', 'footnotes']
+        }
+    },
+}
 
 MIDDLEWARE = [
     # Uncomment to enable django-debug-toolbar

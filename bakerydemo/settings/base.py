@@ -94,6 +94,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
                 "link",
                 "footnotes",
                 "ref-footnotes-style",
+                "ref-footnotes-markers",
             ]
         },
     },

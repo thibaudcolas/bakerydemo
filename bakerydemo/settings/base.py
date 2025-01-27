@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "wagtail_footnotes",
+    "ref_footnotes_style",
+    "ref_footnotes_markers",
     "wagtailfontawesomesvg",
     # Uncomment to enable django-debug-toolbar
     # "debug_toolbar",
@@ -82,11 +84,17 @@ INSTALLED_APPS = [
 
 # Set rich text features
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
-    'default': {
-        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
-        'OPTIONS': {
-            'features': ['h2', 'bold', 'italic', 'link', 'footnotes']
-        }
+    "default": {
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {
+            "features": [
+                "h2",
+                "bold",
+                "italic",
+                "link",
+                "footnotes",
+            ]
+        },
     },
 }
 

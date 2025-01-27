@@ -368,6 +368,7 @@ class HomePage(Page):
             heading="Promo section",
         ),
         FieldPanel("body"),
+        InlinePanel("footnotes", label="Footnotes"),
         MultiFieldPanel(
             [
                 MultiFieldPanel(

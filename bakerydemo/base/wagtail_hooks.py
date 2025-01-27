@@ -5,7 +5,7 @@ from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 
 from bakerydemo.base.filters import RevisionFilterSetMixin
-from bakerydemo.base.models import FooterText, Person
+from bakerydemo.base.models import FooterText, Person, HomePage
 
 """
 N.B. To see what icons are available for use in Wagtail menus and StreamField block types,
@@ -93,69 +93,27 @@ class BakerySnippetViewSetGroup(SnippetViewSetGroup):
 # you only need to register the SnippetViewSetGroup class with Wagtail:
 register_snippet(BakerySnippetViewSetGroup)
 
+from wagtail_notes import footnotes
 
-import wagtail.admin.rich_text.editors.draftail.features as draftail_features
-
-from draftjs_exporter.dom import DOM
-from wagtail import hooks
-from wagtail.admin.rich_text.converters.html_to_contentstate import (
-    InlineEntityElementHandler,
-)
+FOOTNOTE_FIELDS = {
+    "richtextfields": ["promo_text"],
+    "streamfields": ["body"],
+}
 
 
-@hooks.register("register_rich_text_features")
-def register_footnotes_feature(features):
-    """
-    Registering the `footnotes` feature, which uses the `FOOTNOTES` Draft.js
-    entity type, and is stored as HTML with a
-    `<footnotes id="">short-id</footnotes>` tag.
-    """
-    feature_name = "footnotes"
-    type_ = "FOOTNOTES"
-
-    control = {"type": type_, "label": "Fn", "description": "Footnotes"}
-
-    features.register_editor_plugin(
-        "draftail",
-        feature_name,
-        draftail_features.EntityFeature(
-            control,
-            js=["wagtailadmin/js/draftail.js", "js/footnotes.js"],
-        ),
-    )
-
-    features.register_converter_rule(
-        "contentstate",
-        feature_name,
-        {
-            "from_database_format": {
-                "footnote[id]": FootnotesEntityElementHandler(type_)
-            },
-            "to_database_format": {
-                "entity_decorators": {type_: footnotes_entity_decorator}
-            },
-        },
-    )
+@hooks.register("after_create_page")
+def do_after_page_create(request, page):
+    if isinstance(page, HomePage):
+        return footnotes.Footnotary.update_footnotes(page, FOOTNOTE_FIELDS, request)
 
 
-def footnotes_entity_decorator(props):
-    """
-    Draft.js ContentState to database HTML.
-    Converts the FOOTNOTES entities into a footnote tag.
-    """
-    return DOM.create_element("footnote", {"id": props["footnote"]}, props["children"])
+@hooks.register("after_edit_page")
+def do_after_page_edit(request, page):
+    if isinstance(page, HomePage):
+        return footnotes.Footnotary.update_footnotes(page, FOOTNOTE_FIELDS, request)
 
 
-class FootnotesEntityElementHandler(InlineEntityElementHandler):
-    """
-    Database HTML to Draft.js ContentState.
-    Converts the footnote tag into a FOOTNOTES entity, with the right data.
-    """
-
-    mutability = "IMMUTABLE"
-
-    def get_attribute_data(self, attrs):
-        """
-        Take the ``footnote UUID`` value from the ``id`` HTML attribute.
-        """
-        return {"footnote": attrs["id"]}
+@hooks.register("before_serve_page")
+def prep_footnotes(page, request, serve_args, serve_kwargs):
+    if isinstance(page, HomePage):
+        return footnotes.Footnotary.prep_footnotes(page, FOOTNOTE_FIELDS, request)

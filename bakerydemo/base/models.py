@@ -34,6 +34,7 @@ from wagtail.models import (
 )
 from wagtail.search import index
 
+
 from .blocks import BaseStreamBlock
 
 
@@ -344,6 +345,7 @@ class HomePage(Page):
         "six child items.",
         verbose_name="Featured section 3",
     )
+    footnotes = RichTextField(blank=True, null=True)
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -368,7 +370,6 @@ class HomePage(Page):
             heading="Promo section",
         ),
         FieldPanel("body"),
-        InlinePanel("footnotes", label="Footnotes"),
         MultiFieldPanel(
             [
                 MultiFieldPanel(

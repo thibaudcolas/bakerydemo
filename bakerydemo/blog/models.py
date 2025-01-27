@@ -75,7 +75,6 @@ class BlogPage(Page):
         FieldPanel("introduction"),
         FieldPanel("image"),
         FieldPanel("body"),
-        InlinePanel("footnotes", label="Footnotes"),
         FieldPanel("date_published"),
         MultipleChooserPanel(
             "blog_person_relationship",
@@ -179,7 +178,6 @@ class BlogIndexPage(RoutablePageMixin, Page):
     @route(r"^tags/$", name="tag_archive")
     @route(r"^tags/([\w-]+)/$", name="tag_archive")
     def tag_archive(self, request, tag=None):
-
         try:
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:

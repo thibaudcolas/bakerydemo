@@ -66,9 +66,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "modelcluster",
     "taggit",
-    "wagtail_footnotes",
     "ref_footnotes_style",
     "ref_footnotes_markers",
+    "wagtail_notes",
     "wagtailfontawesomesvg",
     # Uncomment to enable django-debug-toolbar
     # "debug_toolbar",

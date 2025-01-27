@@ -9,6 +9,8 @@ WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 
 ALLOWED_HOSTS = ["*"]
 
+MIDDLEWARE.append("static_demo.middleware.AutoLoginMiddleware")
+
 try:
     from .local import *  # noqa
 except ImportError:

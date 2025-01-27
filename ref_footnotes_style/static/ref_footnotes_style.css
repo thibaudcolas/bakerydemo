@@ -1,0 +1,14 @@
+[style="background: var(--ref-footnotes-style);"] {
+  background: rgba(0, 0, 0, 0.05);
+
+}
+
+[style="background: var(--ref-footnotes-style);"]::before {
+  content: "<ref>";
+  opacity: 0.6;
+}
+
+[style="background: var(--ref-footnotes-style);"]::after {
+  content: "</ref>";
+  opacity: 0.6;
+}

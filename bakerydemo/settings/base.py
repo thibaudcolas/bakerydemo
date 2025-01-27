@@ -93,6 +93,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
                 "italic",
                 "link",
                 "footnotes",
+                "ref-footnotes-style",
             ]
         },
     },

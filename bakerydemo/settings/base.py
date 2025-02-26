@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail.api.v2",
-    "wagtail.locales",
+    "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.typed_table_block",
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.settings",
-    "wagtail.contrib.simple_translation",
+    # "wagtail.contrib.simple_translation",
     "wagtail.contrib.styleguide",
     "wagtail",
     "wagtail_headless_preview",
@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "wagtailfontawesomesvg",
+    "wagtail_localize",
     # Uncomment to enable django-debug-toolbar
     # "debug_toolbar",
     "django_extensions",
@@ -217,8 +218,10 @@ WAGTAIL_I18N_ENABLED = True
 
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ("en", "English"),
-    ("de", "Deutsch"),
-    ("ar", "العربيّة"),
+    ("fr", "French"),
+    ("nl", "Dutch"),
+    ("de", "German"),
+    ("ar", "Arabic"),
 ]
 
 WAGTAILIMAGES_AVIF_QUALITY = 60
@@ -263,4 +266,11 @@ WAGTAIL_HEADLESS_PREVIEW = {
         "default": "http://localhost:3000",
     },
     "REDIRECT_ON_PREVIEW": True,
+}
+
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "wagtail_localize.machine_translators.deepl.DeepLTranslator",
+    "OPTIONS": {
+        "AUTH_KEY": os.environ.get("DEEPL_AUTH_KEY"),
+    },
 }

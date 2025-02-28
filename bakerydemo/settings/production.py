@@ -248,6 +248,18 @@ if os.environ.get("BASIC_AUTH_ENABLED", "false").lower().strip() == "true":
 
     BASIC_AUTH_RESPONSE_TEMPLATE = "base/basic_auth.html"
 
+# Configure Sentry, if present in os.environ
+SENTRY_DSN = os.getenv("SENTRY_DSN", "")
+
+if SENTRY_DSN:
+    import sentry_sdk
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        # Add data like request headers and IP for users,
+        # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+        send_default_pii=True,
+    )
 
 # Force HTTPS redirect (enabled by default!)
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-ssl-redirect

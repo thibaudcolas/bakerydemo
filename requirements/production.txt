@@ -11,3 +11,4 @@ django-storages==1.14.2
 aws-requests-auth==0.4.3
 django-redis==5.4.0
 django-basic-auth-ip-whitelist>=0.7,<0.8
+sentry-sdk[django]>=2.22.0,<2.23

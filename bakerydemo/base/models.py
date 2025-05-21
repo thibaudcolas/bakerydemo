@@ -573,3 +573,78 @@ class UserApprovalTask(Task):
     @classmethod
     def get_description(cls):
         return _("Only a specific user can approve this task")
+
+
+
+from wagtail.images.image_operations import (
+    DoNothingOperation,
+    MinMaxOperation,
+    WidthHeightOperation,
+    FillOperation,
+)
+from wagtail.images.models import (
+    AbstractImage,
+    AbstractRendition,
+    Rendition,
+    Filter,
+    Image,
+)
+
+
+def apply_size_operation(operation, width, height):
+    class MockTransform:
+        def __init__(self, size):
+            self.size = size
+
+        def resize(self, size):
+            self.size = size
+            return self
+
+
+        def crop(self, rect):
+            print(rect)
+            self.size = rect.width, rect.height
+            return self
+
+        def get_focal_point(self):
+            pass
+
+    class MockImage:
+        def get_focal_point(self):
+            pass
+
+    transform = MockTransform((width, height))
+    image = MockImage()
+    transform = operation.run(transform, image)
+    return transform.size
+
+
+def get_mock_rendition(self, rendition_filter):
+    """Create a mock rendition object that wraps the original image, mocking
+    the size operations to some extent.
+    """
+    if isinstance(rendition_filter, str):
+        rendition_filter = Filter(spec=rendition_filter)
+
+    width = self.width
+    height = self.height
+
+    print(rendition_filter.operations)
+    for operation in rendition_filter.operations:
+            if isinstance(operation, (WidthHeightOperation, MinMaxOperation, FillOperation)):
+                width, height = apply_size_operation(operation, width, height)
+
+    return Rendition(
+        image=self, file=self.file, width=width, height=height, filter_spec=rendition_filter.spec
+    )
+
+def create_rendition(self, *args, **kwargs):
+    return get_mock_rendition(self, *args, **kwargs)
+
+def create_renditions(self, *filters: Filter):
+    return {f: get_mock_rendition(self, f) for f in filters}
+
+# Monkey patch Wagtail’s rendition creation to avoid database writes.
+if settings.IS_READ_ONLY:
+    Image.create_rendition = create_rendition
+    Image.create_renditions = create_renditions

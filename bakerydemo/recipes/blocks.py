@@ -28,6 +28,31 @@ class RecipeStepBlock(StructBlock):
         template = "blocks/recipe_step_block.html"
         icon = "tick"
 
+table_options = {
+    'colHeaders': True,
+    'rowHeaders': True,
+    'columnSorting': {
+        'initialConfig': {
+            'indicator': True,
+            'sortEmptyCells': True,
+            'headerAction': True,
+            'column': 1,
+            'sortOrder': 'asc',
+        },
+    },
+    'columns': [
+        {},
+        {
+            'type': 'date',
+            # 'editor': 'date',
+            # 'validator': 'date',
+            # 'renderer': 'date',
+            'dateFormat': '',
+            'correctFormat': True,
+        },
+        {},
+    ]
+}
 
 class RecipeStreamBlock(StreamBlock):
     """
@@ -40,6 +65,7 @@ class RecipeStreamBlock(StreamBlock):
     )
     block_quote = BlockQuote(group="Content")
     table_block = TableBlock(
+        table_options=table_options,
         group="Content",
         description="A table of data with plain text cells",
         preview_value={

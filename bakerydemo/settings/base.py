@@ -36,7 +36,12 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+DJANGO_READ_ONLY = False
+
+IS_READ_ONLY = DJANGO_READ_ONLY
+
 INSTALLED_APPS = [
+    "django_read_only",
     "bakerydemo.base",
     "bakerydemo.blog",
     "bakerydemo.breads",

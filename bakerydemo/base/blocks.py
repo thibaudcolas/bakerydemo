@@ -87,7 +87,12 @@ class BlockQuote(StructBlock):
     """
 
     text = TextBlock()
-    attribute_name = CharBlock(blank=True, required=False, label="e.g. Mary Berry")
+    attribution = CharBlock(
+        blank=True,
+        required=False,
+        label="Attribution",
+        help_text="For example Mary Berry",
+    )
 
     class Meta:
         icon = "openquote"
@@ -97,7 +102,7 @@ class BlockQuote(StructBlock):
                 "If you read a lot you're well read / "
                 "If you eat a lot you're well bread."
             ),
-            "attribute_name": "Willie Wagtail",
+            "attribution": "Willie Wagtail",
         }
         description = "A quote with an optional attribution"
 

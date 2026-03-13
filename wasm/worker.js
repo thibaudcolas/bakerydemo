@@ -263,7 +263,11 @@ _environ = {
     "SERVER_NAME": _headers_dict.get("host", "localhost").split(":")[0],
     "SERVER_PORT": _headers_dict.get("host", "localhost:1337").split(":")[-1] if ":" in _headers_dict.get("host", "") else "80",
     "SERVER_PROTOCOL": "HTTP/1.1",
+    "wsgi.version": (1, 0),
     "wsgi.url_scheme": "http",
+    "wsgi.multithread": False,
+    "wsgi.multiprocess": False,
+    "wsgi.run_once": False,
     "wsgi.input": BytesIO(),
     "wsgi.errors": BytesIO(),
 }

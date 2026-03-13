@@ -32,11 +32,18 @@ SECRET_KEY = "wasm-playground-not-secret"  # noqa: S105
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:1337",
     "http://localhost:8000",
     "http://localhost:8080",
+    "http://127.0.0.1:1337",
     "http://127.0.0.1:8000",
     "http://127.0.0.1:8080",
 ]
+
+# Disable CSRF checks entirely. In the WASM playground, all requests are
+# synthetic (constructed by the service worker and fed to WebTest), so the
+# normal browser cookie <-> header token cycle doesn't apply.
+MIDDLEWARE = [m for m in MIDDLEWARE if "Csrf" not in m]  # noqa: F405
 
 # SQLite on Emscripten's IDBFS-backed virtual filesystem (persists to IndexedDB)
 DATABASES = {
@@ -48,7 +55,7 @@ DATABASES = {
 
 EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
 
-WAGTAILADMIN_BASE_URL = "http://localhost:8000"
+WAGTAILADMIN_BASE_URL = "http://localhost:1337"
 
 # Use plain FileSystemStorage for static files (no manifest hashing needed
 # inside the WASM environment -- StaticFilesHandler serves them directly).

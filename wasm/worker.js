@@ -212,12 +212,16 @@ async function djangoRequest(request) {
   const method = request.method.toLowerCase();
   const url = request.url;
 
-  // Build request headers, injecting our manual cookie jar.
+  // Build request headers. Merge any browser-sent cookies with our manual jar
+  // (the browser may have cookies if Set-Cookie flowed through on earlier
+  // responses, but the jar is the authoritative source in the SW context).
   const reqHeaders = {};
   for (const [key, value] of request.headers.entries()) {
     reqHeaders[key] = value;
   }
-  reqHeaders["Cookie"] = buildCookieHeader();
+  const browserCookies = reqHeaders["cookie"] || "";
+  const jarCookies = buildCookieHeader();
+  reqHeaders["Cookie"] = jarCookies || browserCookies;
   if (request.referrer) {
     reqHeaders["Referer"] = request.referrer;
   }
@@ -241,32 +245,53 @@ async function djangoRequest(request) {
   }
   pyodide.globals.set("_req_has_body", hasBody);
 
-  // Execute the request inside Python via the WebTest adapter.
+  // Execute the request inside Python via a raw WebOb Request for full
+  // control over headers and body bytes (avoids WebTest re-encoding
+  // multipart uploads or mangling binary POST data).
   pyodide.runPython(`
 import json as _json
+from io import BytesIO
+from webob import Request as _WebObRequest
 
-_headers = _json.loads(_req_headers)
-_kwargs = dict(
-    headers=_headers,
-    expect_errors=True,
-)
+_headers_dict = _json.loads(_req_headers)
+
+# Build a raw WSGI environ via WebOb so the body passes through untouched.
+_environ = {
+    "REQUEST_METHOD": _req_method.upper(),
+    "PATH_INFO": _req_url.split("?")[0].replace(_headers_dict.get("origin", ""), "") if "://" in _req_url else _req_url.split("?")[0],
+    "QUERY_STRING": _req_url.split("?", 1)[1] if "?" in _req_url else "",
+    "SERVER_NAME": _headers_dict.get("host", "localhost").split(":")[0],
+    "SERVER_PORT": _headers_dict.get("host", "localhost:1337").split(":")[-1] if ":" in _headers_dict.get("host", "") else "80",
+    "SERVER_PROTOCOL": "HTTP/1.1",
+    "wsgi.url_scheme": "http",
+    "wsgi.input": BytesIO(),
+    "wsgi.errors": BytesIO(),
+}
+
+# Strip the origin from PATH_INFO if the full URL was passed.
+if _environ["PATH_INFO"].startswith("http"):
+    from urllib.parse import urlparse as _urlparse
+    _parsed = _urlparse(_req_url)
+    _environ["PATH_INFO"] = _parsed.path
+    _environ["QUERY_STRING"] = _parsed.query
+
+# Map HTTP headers to WSGI environ keys.
+for _hk, _hv in _headers_dict.items():
+    _key = _hk.upper().replace("-", "_")
+    if _key == "CONTENT_TYPE":
+        _environ["CONTENT_TYPE"] = _hv
+    elif _key == "CONTENT_LENGTH":
+        _environ["CONTENT_LENGTH"] = _hv
+    else:
+        _environ["HTTP_" + _key] = _hv
 
 if _req_has_body:
     _body_bytes = bytes(_req_body_js)
-    _ct = _req_content_type
+    _environ["wsgi.input"] = BytesIO(_body_bytes)
+    _environ["CONTENT_LENGTH"] = str(len(_body_bytes))
 
-    if _ct and "multipart/form-data" in _ct:
-        _kwargs["content_type"] = _ct
-        _kwargs["upload_files"] = None
-        _kwargs["params"] = _body_bytes
-    elif _ct and "application/json" in _ct:
-        _kwargs["content_type"] = _ct
-        _kwargs["params"] = _body_bytes
-    else:
-        _kwargs["params"] = _body_bytes.decode("utf-8", errors="replace")
-
-_fn = getattr(app, _req_method)
-_response = _fn(_req_url, **_kwargs)
+_webreq = _WebObRequest(_environ)
+_response = app.do_request(_webreq, expect_errors=True)
 
 try:
     _resp_body = _response.text
@@ -275,9 +300,15 @@ except UnicodeDecodeError:
     _resp_body = _response.body
     _resp_is_binary = True
 
-# Build headers dict, but collect all Set-Cookie values separately
-_resp_hdr_dict = dict(_response.headers)
-_resp_set_cookies = _response.headers.getall("Set-Cookie") if hasattr(_response.headers, "getall") else []
+# Collect headers. Use headerlist to preserve ALL Set-Cookie entries.
+_resp_hdr_dict = {}
+_resp_set_cookies = []
+for _hname, _hval in _response.headerlist:
+    if _hname.lower() == "set-cookie":
+        _resp_set_cookies.append(_hval)
+    else:
+        _resp_hdr_dict[_hname] = _hval
+
 _resp_headers_json = _json.dumps(_resp_hdr_dict)
 _resp_set_cookies_json = _json.dumps(_resp_set_cookies)
 _resp_status = _response.status_int
@@ -316,9 +347,6 @@ _resp_status = _response.status_int
     );
   }
 
-  // Remove headers that don't make sense in service-worker context.
-  delete respHeaders["Set-Cookie"];
-
   let body;
   if (isBinary) {
     const pyBody = pyodide.globals.get("_resp_body");
@@ -328,6 +356,21 @@ _resp_status = _response.status_int
     body = pyodide.globals.get("_resp_body");
   }
 
+  // Build a proper Headers object so we can include multiple Set-Cookie
+  // entries (a plain object would deduplicate them).
+  const outHeaders = new Headers();
+  for (const [k, v] of Object.entries(respHeaders)) {
+    if (k.toLowerCase() !== "set-cookie") {
+      outHeaders.set(k, v);
+    }
+  }
+  // Append each Set-Cookie individually so the browser stores session,
+  // CSRF, and messages cookies. This also makes document.cookie work,
+  // which Wagtail's JS relies on for X-CSRFToken AJAX headers.
+  for (const sc of setCookies) {
+    outHeaders.append("Set-Cookie", sc);
+  }
+
   // Sync database to IndexedDB after write operations.
   if (["post", "put", "patch", "delete"].includes(method)) {
     syncDatabaseToIDB();
@@ -335,7 +378,7 @@ _resp_status = _response.status_int
 
   return new Response(body, {
     status: status,
-    headers: respHeaders,
+    headers: outHeaders,
   });
 }
 

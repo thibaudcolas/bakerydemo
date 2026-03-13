@@ -33,7 +33,7 @@ format: format-server format-client
 wasm-wheel:
 	rm -rf wasm/wheel
 	mkdir -p wasm/wheel
-	pip wheel . --no-deps -w wasm/wheel
+	uv build --wheel . -o wasm/wheel
 
 wasm-serve:
-	python3 wasm/serve.py 8000
+	python3 wasm/serve.py 1337

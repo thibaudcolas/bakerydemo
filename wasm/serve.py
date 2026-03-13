@@ -21,7 +21,7 @@ class WasmHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 1337
     os.chdir(os.path.join(os.path.dirname(__file__), ".."))
     server = http.server.HTTPServer(("", port), WasmHTTPRequestHandler)
     print(f"Serving WASM playground at http://localhost:{port}")

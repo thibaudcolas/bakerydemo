@@ -1,0 +1,42 @@
+# Packaging config used exclusively for building a .whl that can be installed
+# inside Pyodide via micropip.  This is NOT used for normal development.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bakerydemo"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+# Dependencies are NOT listed here -- they are installed separately inside
+# the service worker (some from Pyodide's built-in packages, others via
+# micropip). Listing them here would cause micropip to try to resolve
+# version constraints it can't satisfy in the WASM environment.
+
+[tool.setuptools.packages.find]
+include = ["bakerydemo*"]
+
+[tool.setuptools.package-data]
+"*" = [
+    "*.html",
+    "*.txt",
+    "*.json",
+    "*.css",
+    "*.js",
+    "*.svg",
+    "*.png",
+    "*.jpg",
+    "*.jpeg",
+    "*.JPG",
+    "*.gif",
+    "*.webp",
+    "*.ico",
+    "*.pdf",
+    "*.woff",
+    "*.woff2",
+    "*.ttf",
+    "*.eot",
+    "*.map",
+]

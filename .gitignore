@@ -23,3 +23,6 @@ __pycache__
 /bakerydemo/cache
 !.gitignore
 bakerydemo/collect_static
+build/
+*.egg-info/
+db.sqlite3

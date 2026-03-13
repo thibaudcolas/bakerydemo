@@ -1,8 +1,10 @@
-.PHONY: lint format
+.PHONY: lint format wasm-wheel wasm-serve
 
 help:
 	@echo "lint - check style with ruff, sort python with ruff, indent html, and lint frontend css/js"
 	@echo "format - enforce a consistent code style across the codebase, sort python files with ruff and fix frontend css/js"
+	@echo "wasm-wheel - build the bakerydemo wheel for the WASM playground"
+	@echo "wasm-serve - serve the WASM playground on localhost:8000"
 
 lint-server:
 	ruff format --check .
@@ -27,3 +29,11 @@ format-client:
 	npm run fix:js
 
 format: format-server format-client
+
+wasm-wheel:
+	rm -rf wasm/wheel
+	mkdir -p wasm/wheel
+	pip wheel . --no-deps -w wasm/wheel
+
+wasm-serve:
+	python3 wasm/serve.py 8000

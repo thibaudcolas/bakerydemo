@@ -1,4 +1,3 @@
-import debug_toolbar
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
@@ -24,8 +23,14 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("sitemap.xml", sitemap),
     path("api/v2/", api_router.urls),
-    path("__debug__/", include(debug_toolbar.urls)),
 ]
+
+try:
+    import debug_toolbar
+
+    urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
+except ImportError:
+    pass
 
 
 if settings.DEBUG:

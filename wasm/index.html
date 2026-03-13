@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wagtail Bakery Demo - WebAssembly Playground</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    #loading {
+      text-align: center;
+      max-width: 520px;
+      padding: 2rem;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem;
+      color: #fff;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #9e9eb8;
+      margin: 0 0 2rem;
+    }
+
+    .progress-track {
+      background: #2a2a4a;
+      border-radius: 8px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #2ee59d, #00b4d8);
+      height: 100%;
+      width: 0%;
+      border-radius: 8px;
+      transition: width 0.4s ease;
+    }
+
+    #status {
+      font-size: 0.875rem;
+      color: #b0b0cc;
+      min-height: 1.25em;
+    }
+
+    .info {
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      color: #6e6e8a;
+      line-height: 1.6;
+    }
+
+    .info code {
+      background: #2a2a4a;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    .reset-link {
+      color: #6e6e8a;
+      text-decoration: underline;
+      font-size: 0.8rem;
+    }
+
+    .reset-link:hover {
+      color: #9e9eb8;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <!-- Wagtail bird SVG (simplified) -->
+    <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#2ee59d" opacity="0.15"/>
+      <text x="50" y="62" text-anchor="middle" font-size="44" fill="#2ee59d">🐦</text>
+    </svg>
+
+    <h1>Wagtail Bakery Demo</h1>
+    <p class="subtitle">WebAssembly Playground</p>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar"></div>
+    </div>
+
+    <p id="status">Initializing...</p>
+
+    <div class="info">
+      <p>
+        This runs the full Wagtail CMS in your browser using Python compiled
+        to WebAssembly. First load may take 30-60 seconds.
+      </p>
+      <p>
+        Admin: <code>admin</code> / <code>changeme</code>
+      </p>
+      <p>
+        <a href="/wasm/index.html?reset" class="reset-link">Reset &amp; clear all data</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="/wasm/app.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.images.views.serve import ServeView
+from wagtail.api.v3.urls import api
 
 from bakerydemo.search import views as search_views
 
@@ -24,6 +25,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("sitemap.xml", sitemap),
     path("api/v2/", api_router.urls),
+    path("api/v3/", api.urls),
     path("__debug__/", include(debug_toolbar.urls)),
 ]
 

@@ -118,7 +118,7 @@ class RecipePage(Page):
         APIField("subtitle"),
         APIField("introduction"),
         APIField("backstory"),
-        APIField("recipe_headline"),
+        APIField("recipe_headline", writable=True),
         APIField("body"),
         APIField("recipe_person_relationship"),
     ]

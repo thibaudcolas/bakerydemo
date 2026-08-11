@@ -119,10 +119,10 @@ class Person(
     ]
 
     api_fields = [
-        APIField("first_name"),
-        APIField("last_name"),
-        APIField("job_title"),
-        APIField("image"),
+        APIField("first_name", writable=True),
+        APIField("last_name", writable=True),
+        APIField("job_title", writable=True),
+        APIField("image", writable=True),
     ]
 
     @property
@@ -205,7 +205,7 @@ class FooterText(
     ]
 
     api_fields = [
-        APIField("body"),
+        APIField("body", writable=True),
     ]
 
     def __str__(self):

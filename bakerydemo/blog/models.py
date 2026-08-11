@@ -33,7 +33,7 @@ class BlogPersonRelationship(Orderable, models.Model):
 
     api_fields = [
         APIField("page"),
-        APIField("person"),
+        APIField("person", writable=True),
     ]
 
 
@@ -98,13 +98,13 @@ class BlogPage(Page):
     ]
 
     api_fields = [
-        APIField("introduction"),
-        APIField("image"),
-        APIField("body"),
-        APIField("subtitle"),
-        APIField("tags"),
-        APIField("date_published"),
-        APIField("blog_person_relationship"),
+        APIField("introduction", writable=True),
+        APIField("image", writable=True),
+        APIField("body", writable=True),
+        APIField("subtitle", writable=True),
+        APIField("tags", writable=True),
+        APIField("date_published", writable=True),
+        APIField("blog_person_relationship", writable=True),
     ]
 
     def authors(self):

@@ -27,7 +27,7 @@ class Country(models.Model):
     sort_order = models.IntegerField(null=True, blank=True, db_index=True)
 
     api_fields = [
-        APIField("title"),
+        APIField("title", writable=True),
     ]
 
     def __str__(self):
@@ -63,7 +63,7 @@ class BreadIngredient(Orderable, DraftStateMixin, RevisionMixin, models.Model):
     ]
 
     api_fields = [
-        APIField("name"),
+        APIField("name", writable=True),
     ]
 
     def __str__(self):
@@ -101,7 +101,7 @@ class BreadType(RevisionMixin, models.Model):
     ]
 
     api_fields = [
-        APIField("title"),
+        APIField("title", writable=True),
     ]
 
     def __str__(self):
